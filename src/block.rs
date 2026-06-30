@@ -1,19 +1,28 @@
+use std::marker::PhantomData;
+
 use crate::{state::StateModel, transaction::Transaction};
 
 /// Block is a batch of transactions
 #[derive(Debug, Default)]
 pub struct Block<State: StateModel> {
-    header: Header<State>,
-    body: Body,
+    pub header: Header,
+    pub body: Body,
+    pub state_kind: PhantomData<State>,
 }
 
+/// The  block header stores root such as
+///     1. state root
+///     2. transactions root
+///     3. receipt root
+/// These roots are compact finger print of large data structure.
+///
 #[derive(Debug, Default)]
-struct Header<State: StateModel> {
+pub struct Header {
     /// It is a hash pointer which stores the pointer to previous block and its hash for validation
     /// if the hash stored doesn't match the hash of block, then the chain is tempered
-    previous_block_hash: [u8; 32],
-    // TODO: what is type?
-    timestamp: String,
+    pub previous_block_hash: [u8; 32],
+    // FIXME: should be a timestamp
+    pub timestamp: String,
     // TODO: what is type?
     /// Merkle tree is the tree of hashes
     /// It is used to validate the transactions present in current block
@@ -34,23 +43,26 @@ struct Header<State: StateModel> {
     /// merkle_root = hash(h12 + h34)
     ///
     /// Through this merkle tree we can valiate easily if the transactions are valid or not
-    merkle_root: String,
+    pub merkle_root: String,
     // TODO: what is type?
     /// Block chain stores history but users generally care about the current state
-    state_root: State,
+    /// Cryptographic commitment to entire world state
+    /// it means if any account balance or contract storage changes, the state root changes
+    /// This allows nodes to verify they are working with the same state
+    pub state_root: String,
     // TODO: what is type?
-    transaction_root: String,
+    pub transaction_root: String,
     // TODO: what is type?
-    receipts_root: String,
+    pub receipts_root: String,
     // TODO: what is type?
-    validator_info: String,
+    pub validator_info: String,
     // TODO: what is type?
-    block_number: u128,
+    pub block_number: u128,
     // TODO: what is type?
-    consensus_fields: String,
+    pub consensus_fields: String,
 }
 
 #[derive(Debug, Default)]
-struct Body {
-    transactions: Vec<Transaction>,
+pub struct Body {
+    pub transactions: Vec<Transaction>,
 }

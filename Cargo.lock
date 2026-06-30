@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "block-chain"
+name = "learn-block-chain"
 version = "0.1.0"
