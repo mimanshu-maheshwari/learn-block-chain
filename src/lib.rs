@@ -5,6 +5,7 @@
 pub mod block;
 pub mod blockchain;
 pub mod consensus;
+pub mod dapp;
 pub mod mempool;
 pub mod network;
 pub mod node;

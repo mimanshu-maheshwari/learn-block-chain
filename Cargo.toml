@@ -2,4 +2,4 @@
 name = "learn-block-chain"
 version = "0.1.0"
 edition = "2024"
-author = ["Mimanshu Maheshwari <maheshwarimimanshu@gmail.com>"]
+authors = ["Mimanshu Maheshwari <maheshwarimimanshu@gmail.com>"]

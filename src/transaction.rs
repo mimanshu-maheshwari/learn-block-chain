@@ -28,9 +28,26 @@ pub struct Transaction {
     /// sender transaction counter
     pub nonce: u32,
     /// max computation sender allows
-    pub gas: u32,
+    ///
+    /// Gas is the fee modal for computation
+    ///
+    /// Every operation has a cost
+    ///
+    /// For example:
+    ///
+    ///     Adding numbers: cheap
+    ///     Writing to storage : expensive
+    ///     deploying contract : expensive
+    ///
+    /// Gas exist to prevent infinite computation
+    /// Without gas someone could deploy a contract with and infinite loop and freeze the network.
+    ///
+    /// If user runs out of gas, the transaction fails, but the user still pays for computation
+    /// already consumed.
+    pub gas: f64,
     /// payment to validator
     pub fee: f64,
+    pub priority_fee: f64,
     // TODO: what is type?
     /// Proof that sender authorized this
     ///

@@ -4,7 +4,7 @@
 pub struct Receipt {
     /// success or failure
     pub status: String,
-    pub gas_useed: u32,
+    pub gas_useed: f64,
     // TODO: what is the type of event?
     /// logs or events emitted
     ///
