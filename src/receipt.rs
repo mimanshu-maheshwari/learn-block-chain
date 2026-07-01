@@ -4,7 +4,7 @@
 pub struct Receipt {
     /// success or failure
     pub status: String,
-    pub gas_useed: f64,
+    pub gas_used: f64,
     // TODO: what is the type of event?
     /// logs or events emitted
     ///
@@ -17,8 +17,10 @@ pub struct Receipt {
     ///
     /// Some block chains uses bloom filters to check if logs exists or not in a block
     /// it can say
+    ///
     ///     1. definately not present
     ///     2. maybe present
+    ///
     pub event_logs: Vec<String>,
     pub contract_address_created: String,
 }

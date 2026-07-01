@@ -1,6 +1,8 @@
 //! ## What is blockchain?
 //! At simplest, it is a linked list of blocks
+//!
 //! Genesis block -> block1 -> block2 -> block3 ... -> blockn
+//!
 //! The first block is called genesis block
 //!
 //! Some time two valid blocks are generated on same time.
@@ -8,9 +10,11 @@
 //! Consensus decides which branch becomes canonical
 //!
 //! It can be viewed as a state machine
+//!
 //! Old state + Transactions = New state
 //!
 //! *Blockchain is a replicated state machine where nodes agree on the order of transactions*
+//!
 //! ## Defination:
 //! Blockchain is a decentralized Computation and information sharing platform that enables
 //! multiple authoritative domains who do not trust each other, to co-operate, co-ordinate and
@@ -70,8 +74,6 @@
 //!     2. Lower fees
 //!     3. Still inherit some security from L1
 
-use std::default;
-
 #[derive(Debug, Default)]
 pub struct Blockchain {}
 
@@ -84,12 +86,44 @@ pub struct Blockchain {}
 #[derive(Debug, Default)]
 pub enum BlockchainType {
     #[default]
+    /// public read, private validator/executions
     Hybrid,
+
+    /// Layer 0:
+    /// Infrastructure for connecting blockchains.
+    /// Example: Cosmos IBC, Polkadot-style interoperability, cross-chain messaging.
+    L0,
+
+    /// Layer 1:
+    /// The base blockchain.
+    /// Example: Bitcoin, Ethereum, Solana.
+    /// Function: consensus, security, settlement, state.
+    ///Layer 1 was not enough for mass adoption because it is expensive and limited in throughput.
     L1,
+
+    /// Layer 2:
+    /// Scaling layer on top of Layer 1.
+    /// Example: Arbitrum, Optimism, Base, zkSync.
+    /// Function: cheaper and faster transactions.
+    /// Layer 2 was created to scale Layer 1 by processing transactions off-chain or on a separate rollup, then settling/proving results back to L1.
     L2,
+
+    /// Layer 3:
+    /// Application-specific layer on top of Layer 2.
+    /// Example: gaming rollup, DeFi appchain, custom enterprise chain.
+    /// Function: customization, app-specific scaling, custom rules.
+    /// Layer 3 was created because some apps need more than scaling — they need their own custom rules, gas token, privacy model, governance, and dedicated block space.
+    L3,
+
+    /// small chains connected through bridge for cheaper executions
+    /// not as secure as main chain
     Sidechain,
+
+    /// app specific validators
     AppChain,
+
     Permissionless(PermissionlessKind),
+
     /// Only provided participants can validate or write certain data.
     /// This is common in enterprise settings.
     /// permissioned chains optimize for control, performance, compliance, and known participants.
@@ -171,6 +205,7 @@ pub enum PermissionedKind {
     ///
     #[default]
     PublicPermissioned,
+
     /// Access is restricted usually inside companies or consortiums.
     /// Private chains optimize for control, performance, compliance, and known participants.
     /// This is common in enterprice
@@ -215,6 +250,7 @@ pub enum PermissionedKind {
     ///     5. may not need blockchain if one central database is enough
     ///
     PrivatePermissioned,
+
     /// ## Consortium or federated blockchain
     /// A consortium blockchain is a specific kind of blockchain where multiple organizations
     /// jointly operate the network.
