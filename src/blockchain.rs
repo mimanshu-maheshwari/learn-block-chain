@@ -43,6 +43,217 @@
 //!     7. deploy contracts
 //!     8. build apps on top
 //!
+//! # Layer 1 Blockchain:
+//! Layer 1 is the base blockchain.
+//! Examples:
+//!
+//!     1. Bitcoin
+//!     2. Ethereum
+//!     3. Solana
+//!     4. Avalanche
+//!     5. Cosmos Chain
+//!
+//! # Layer 2 Blockchain
+//! are scailing system built on top of layer 1 blockchain.
+//!
+//! Examples:
+//!
+//!     1. Rollups
+//!     2. State channels
+//!     3. Plasma-style systems
+//!     4. Sidechains
+//!     5. Validiums
+//!
+//! Main goal is:
+//!
+//!     1. More throughput
+//!     2. Lower fees
+//!     3. Still inherit some security from L1
+
+use std::default;
 
 #[derive(Debug, Default)]
 pub struct Blockchain {}
+
+/// Types of block chain
+///
+/// Private/public blockchain means who can see/read the ledger.
+///
+/// Permissioned/permissionless means who can join, submit, or validate
+///
+#[derive(Debug, Default)]
+pub enum BlockchainType {
+    #[default]
+    Hybrid,
+    L1,
+    L2,
+    Sidechain,
+    AppChain,
+    Permissionless(PermissionlessKind),
+    /// Only provided participants can validate or write certain data.
+    /// This is common in enterprise settings.
+    /// permissioned chains optimize for control, performance, compliance, and known participants.
+    Permissioned(PermissionedKind),
+}
+
+#[derive(Debug, Default)]
+pub enum PermissionlessKind {
+    /// Anyone can read public blockchain
+    ///
+    /// Anyone can :
+    ///
+    ///     1. read
+    ///     2. send transactions
+    ///     3. Run a node
+    ///     4. Participate according to protocol rules.
+    ///
+    /// Examples:
+    ///
+    ///     1. Bitcoin
+    ///     2. Ethereum
+    ///
+    /// Public blockchain optimize for open participation and censorship resistance.
+    ///
+    /// Use cases:
+    ///
+    ///     1. Open money
+    ///     2. Public asset ownership
+    ///     3. DeFi
+    ///     4. NFTs
+    ///     5. public smart contracts
+    ///     6. censorship resistance
+    ///     7. global settlement
+    ///
+    /// Advantages:
+    ///
+    ///     1. Highly Open
+    ///     2. Strong transparency
+    ///     3. High cencorship resistance
+    ///     4. Large public network effects
+    ///     5. Anyone can verify state
+    ///
+    /// Disadvantages:
+    ///
+    ///     1. Low privacy by default.
+    ///     2. Fees can fluctuate.
+    ///     3. Performance is limited compared to centralized databases.
+    ///     4. Governance can be slow.
+    ///     5. Data is visible to everyone.
+    #[default]
+    Public,
+}
+
+#[derive(Debug, Default)]
+pub enum PermissionedKind {
+    /// Anyone can read the ledger.
+    /// Anyone can observe the system.
+    /// But only approved entities can validate or produce blocks.
+    ///
+    /// public visibility + controlled validators.
+    ///
+    ///     1. regulated asset network
+    ///     2. public audit ledgers
+    ///     3. government transparency systems
+    ///     4. industry networks where public visibility is useful
+    ///
+    /// Advantages:
+    ///
+    ///     1. More transparent than private chain
+    ///     2. Usually faster than fully permissionless chains
+    ///     3. Validator accountability is easier.
+    ///     4. Governance is more controlled.
+    ///
+    /// Disadvantages:
+    ///
+    ///     1. Less decentralized
+    ///     2. Validator cencorship is easier
+    ///     3. Users must trust the validator governance model.
+    ///
+    #[default]
+    PublicPermissioned,
+    /// Access is restricted usually inside companies or consortiums.
+    /// Private chains optimize for control, performance, compliance, and known participants.
+    /// This is common in enterprice
+    /// Examples of technologies used for this style are:
+    ///
+    ///     1. Hyperledger Besu
+    ///     2. Hyperledger Fabric
+    ///     3. Quorum-style networks
+    ///     4. Corda like enterprice ledgers
+    ///
+    /// Here only approved,
+    ///
+    ///     1. users can access the networks.
+    ///     2. nodes can connect.
+    ///     3. accounts may transact.
+    ///     4. validators can produce blocks.
+    ///
+    /// Example use cases:
+    ///
+    ///     1. bank settlement networks
+    ///     2. supply chain tracking.
+    ///     3. trade finance.
+    ///     4. inter-company reconciliation.
+    ///     5. enterprise asset tokenization
+    ///     6. private consortium ledgers
+    ///
+    /// Advantages:
+    ///
+    ///     1. Higher privacy
+    ///     2. Higher throughput
+    ///     3. lower transaction cost
+    ///     4. Known participants
+    ///     5. Easier compliance
+    ///     6. Custom governance
+    ///
+    /// Disadvantages:
+    ///
+    ///     1. less decentralized
+    ///     2. More trust in administrators
+    ///     3. smaller validator set
+    ///     4. weaker censorship resistance
+    ///     5. may not need blockchain if one central database is enough
+    ///
+    PrivatePermissioned,
+    /// ## Consortium or federated blockchain
+    /// A consortium blockchain is a specific kind of blockchain where multiple organizations
+    /// jointly operate the network.
+    ///
+    /// Example:
+    ///
+    ///     1. 5 banks create a settlement network.
+    ///     2. each bank runs validator nodes.
+    ///     3. rules are agreed by the consortium.
+    ///
+    /// The validator set may look like:
+    ///
+    ///     Bank A validator
+    ///     Bank B validator
+    ///     Bank C validator
+    ///     Bank D validator
+    ///     Regulator observer node
+    ///
+    /// Good for :
+    ///
+    ///     1. Banking
+    ///     2. insurance
+    ///     3. logistics
+    ///     4. suply chain
+    ///     5. healthcare records
+    ///     6. government-industry systems
+    ///
+    /// Advantages:
+    ///
+    ///     1. Shared governance
+    ///     2. Better trust distribution than one central database
+    ///     3. more privacy than public blockchain
+    ///     4. known validator identities.
+    ///
+    /// Disadvantages:
+    ///
+    ///     1. Governance can become political
+    ///     2. Adding/removing member requires process.
+    ///     3. Users must trust the consortium rules
+    ///     4. not as open as public networks.
+    Consortium,
+}
