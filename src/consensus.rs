@@ -1,5 +1,7 @@
 //! ## Consensus
 //!
+//! consensus means agreement
+//!
 //! Consensus is the rule system that lets distributed node agree on canonical chain.
 //! The core questions are:
 //!
@@ -151,3 +153,30 @@ pub enum Finality {
     /// to reverse
     Probablistic,
 }
+
+/// Block proposer
+/// is the participant selected to create teh enxt block.
+///
+/// the propser chooses which transaction to include
+/// transaction order
+/// block metadata
+/// parent block
+pub struct BlockProposer;
+
+/// Fork happens when the blockchain temporarily or permanently splits into different branches.
+///
+/// This can happen when
+/// - Two minors find block at nearly same time.
+/// - Network delay causes nodes to see different block first
+/// - validators disagree
+/// - software rules change
+/// - malicious actor create conflicting blocks
+///
+/// There are two broad types:
+///
+///     1. temporary fork; happens because of timing; eventually network chooses one batch;
+///     2. Protocol fork; happens when blockchain rules change;
+///
+///         2.1. Soft fork
+///         2.2. Hard fork
+pub struct Fork;
