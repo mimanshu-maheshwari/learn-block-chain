@@ -1,4 +1,4 @@
-//! this is a block chain library to understand the working of block chains
+//! This is a block chain library to understand the working of block chains
 
 #![allow(unused, non_camel_case_types)]
 

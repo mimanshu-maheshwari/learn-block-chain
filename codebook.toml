@@ -1,1 +1,6 @@
-words = ["Merkle"]
+words = [
+    "Besu",
+    "EVM",
+    "Ethereum",
+    "Merkle",
+]

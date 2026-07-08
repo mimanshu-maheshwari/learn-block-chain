@@ -91,7 +91,7 @@
 /// Given the same input and same state, every node must produce same output.
 ///
 /// Smart contracts can behave randomly unless randomness is provided through
-/// a more secure external mechanisim
+/// a more secure external mechanism
 ///
 /// They also can't call normal web API's by themselves.
 /// That is why blockchain uses oracles.
@@ -115,3 +115,5 @@ pub struct SmartContract {
     /// this allows developers to know contract address before deployment
     pub contract_address: String,
 }
+
+mod solidity;
