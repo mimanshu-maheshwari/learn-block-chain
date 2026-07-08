@@ -21,4 +21,5 @@ pub mod rollups;
 pub mod signature;
 pub mod smart_contract;
 pub mod state;
+pub mod testnet;
 pub mod transaction;

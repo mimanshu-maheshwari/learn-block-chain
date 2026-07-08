@@ -1,6 +1,17 @@
 words = [
+    "BSC",
     "Besu",
     "EVM",
     "Ethereum",
+    "GWEI",
+    "Hoodi",
+    "IPFS",
     "Merkle",
+    "NFT",
+    "QBFT",
+    "Relayers",
+    "Sepolia",
+    "keccak",
+    "permissioned",
+    "relayer",
 ]
