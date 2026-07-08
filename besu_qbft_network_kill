@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+echo "Stopping all running Besu nodes..."
+
+# Get the process IDs (PIDs) of the running besu instances
+BESU_PIDs=$(pgrep -f besu)
+
+if [ -z "$BESU_PIDs" ]; then
+    echo "No running Besu nodes found."
+else
+    # Kill them gracefully
+    echo "$BESU_PIDs" | xargs kill
+    echo "Besu nodes have been shut down cleanly."
+fi
